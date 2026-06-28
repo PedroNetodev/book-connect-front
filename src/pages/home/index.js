@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import ReactLoading from 'react-loading';
+import { safeArray } from '../../utils/book';
 
 const BookCard = dynamic(() => import('../../components/BookCard'), { ssr: false });
 
@@ -26,7 +27,7 @@ export default function Index() {
       const data = await response.json();
       console.log(data)
 
-      const booksWithImages = await Promise.all(data.map(async (book) => {
+      const booksWithImages = await Promise.all(safeArray(data).map(async (book) => {
         const imageResponse = await fetch(`https://book-connect-backend.vercel.app/api/livros/image/${book.id}`);
         console.log(imageResponse)
         const blob = await imageResponse.blob();

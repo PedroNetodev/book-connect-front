@@ -1,24 +1,10 @@
 import React from 'react';
-import { Card, Button, Badge, Row, Image } from 'react-bootstrap';
+import { Card, Button, Badge, Image } from 'react-bootstrap';
 import { faEdit, faRemove } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { getConservacaoLabel } from '../../utils/book';
 
 const BookCard = ({ livro, handleCardClick, handleRemoveClick, handleEditClick, handleSellClick, handleExchangeClick }) => {
-  const getConservacaoLabel = (conservacao) => {
-    switch (conservacao) {
-      case 0:
-        return 'Novo';
-      case 1:
-        return 'Semi-novo';
-      case 2:
-        return 'Com marcas de uso';
-      case 3:
-        return 'Desgastado';
-      default:
-        return '';
-    }
-  };
-
   return (
     <div className='col-lg-4 col-md-5 col-sm-6 mt-5'>
       <div className='border p-2 m-1 d-flex flex-row'>
@@ -27,7 +13,7 @@ const BookCard = ({ livro, handleCardClick, handleRemoveClick, handleEditClick, 
           <Image className='img-fluid col-md-5 mb-2' src={`${livro.imageUrl}`} style={{ "maxHeight": 250, "minHeight": 250 }} alt="Book Icon" />
           <div className='col-md-7' onClick={handleCardClick} style={{ cursor: 'pointer' }}>
             <Card.Title className='mt-2'>
-              <strong>Título: </strong>
+              <strong>Titulo: </strong>
               <br />
               {livro.titulo}
             </Card.Title>

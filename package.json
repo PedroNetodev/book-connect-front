@@ -6,7 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "jest",
+    "test:unit": "jest tests/unit",
+    "test:selenium": "node tests/selenium/run-selenium-tests.js",
+    "prints:manual": "node tests/selenium/capture-manual-screenshots.js"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
@@ -21,5 +25,12 @@
     "react-input-mask": "^2.0.4",
     "react-loading": "^2.0.3",
     "react-number-format": "^5.3.4"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "jest": "^30.4.2",
+    "jest-environment-jsdom": "^30.4.1",
+    "selenium-webdriver": "^4.45.0"
   }
 }

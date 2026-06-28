@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './login.css';
 import { useRouter } from 'next/router';
-
+import { validateLoginCredentials } from '../../utils/loginValidation';
 
 function Login({ Component, pageProps }) {
   const router = useRouter();
@@ -12,20 +12,7 @@ function Login({ Component, pageProps }) {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const validationErrors = {};
-
-    if (!email) {
-      validationErrors.email = 'O campo de e-mail é obrigatório';
-    } else if (!/^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)) {
-      validationErrors.email = 'Formato de e-mail inválido';
-    }
-
-    if (!password) {
-      validationErrors.password = 'O campo de senha é obrigatório';
-    } else if (password.length < 6) {
-      validationErrors.password = 'A senha deve ter no mínimo 6 caracteres';
-    }
-
+    const validationErrors = validateLoginCredentials(email, password);
     setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {
@@ -36,7 +23,7 @@ function Login({ Component, pageProps }) {
   return (
     <div className="login-container">
       <img src='/images/login.png' alt="logo login" />
-      <h5>Faça seu login no BookConnect</h5>
+      <h5>Faca seu login no BookConnect</h5>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="email">E-mail:</label>
@@ -69,5 +56,3 @@ function Login({ Component, pageProps }) {
 }
 
 export default Login;
-
-

@@ -5,9 +5,9 @@ export default function Index() {
     return (
         <div className="container m-3 p-3">
             <a href="/contatos/cadastro" className="btn btn-primary">Cadastrar</a>
-            <div class="row">
-                <div class="col-sm-12">
-                    <table id="table-clientes" class="table table-striped">
+            <div className="row">
+                <div className="col-sm-12">
+                    <table id="table-clientes" className="table table-striped">
                         <thead>
                             <tr>
                                 <th scope="col">#</th>

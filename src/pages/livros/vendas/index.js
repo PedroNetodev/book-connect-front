@@ -3,6 +3,8 @@ import { useRouter } from 'next/router';
 import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ReactLoading from 'react-loading';
+import { safeArray } from '../../../utils/book';
+import { formatCurrencyBRL } from '../../../utils/currency';
 
 export default function Vendas() {
     const [vendas, setVendas] = useState([]);
@@ -72,13 +74,13 @@ export default function Vendas() {
                             </tr>
                         </thead>
                         <tbody>
-                            {Array.isArray(vendas) && vendas.map((venda) => (
+                            {safeArray(vendas).map((venda) => (
                                 <tr key={venda.id}>
                                     <td>{venda.titulo}</td>
-                                    <td>{new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(venda.valor)}</td>
+                                    <td>{formatCurrencyBRL(venda.valor)}</td>
                                     <td>{new Date(venda.data_venda).toLocaleString()}</td>
                                     <td>{venda.delivery ? 'Sim' : 'Não'}</td>
-                                    <td>{new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(venda.valor_frete)}</td>
+                                    <td>{formatCurrencyBRL(venda.valor_frete)}</td>
                                     <td>{venda.cep}</td>
                                     <td>{venda.estado}</td>
                                     <td>{venda.cidade}</td>

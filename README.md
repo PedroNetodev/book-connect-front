@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Book Connect - Trabalho Final de Testes
 
-## Getting Started
+Projeto utilizado para o trabalho final da disciplina Teste e Manutencao de Software.
 
-First, run the development server:
+## Entregas preparadas
+
+- 10 testes unitarios com Jest.
+- 10 testes funcionais automatizados com Selenium.
+- 10 testes funcionais manuais documentados com prints.
+- Relatorio de defeitos e solucoes.
+- Documento de refatoracoes.
+- Roteiro sugerido para video narrado de ate 10 minutos.
+
+## Instalar dependencias
+
+```bash
+npm install
+```
+
+## Rodar o projeto
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Depois acesse:
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+```text
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Rodar os testes unitarios
 
-## Learn More
+```bash
+npm run test:unit -- --runInBand
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Rodar os testes funcionais automatizados
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run test:selenium
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+O script inicia o Next.js, abre o Chrome pelo Selenium, executa os 10 casos e salva prints em:
 
-## Deploy on Vercel
+```text
+docs/prints/selenium
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Gerar prints dos testes manuais
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```bash
+npm run prints:manual
+```
+
+Os prints ficam em:
+
+```text
+docs/prints/manuais
+```
+
+## Documentos
+
+- `docs/plano-de-testes-book-connect.md`
+- `docs/relatorio-defeitos-e-solucoes-book-connect.md`
+- `docs/refatoracoes.md`
+- `docs/roteiro-video.md`

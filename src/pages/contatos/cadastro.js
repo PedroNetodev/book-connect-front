@@ -1,59 +1,42 @@
 import React, { useState } from 'react';
-import './ContactForm.css'; // Importe o arquivo CSS para estilização
+import './ContactForm.css';
+import { formatBrazilianPhone, isValidBrazilianCellphone, isValidContactEmail } from '../../utils/contactValidation';
 
 const ContactForm = () => {
-  // Estado para armazenar os dados do contato
   const [contact, setContact] = useState({
     name: '',
     email: '',
-    phone: ''
+    phone: '',
   });
 
-  // Estado para controlar a validade do email
   const [emailValid, setEmailValid] = useState(true);
-  // Estado para controlar a validade do telefone
   const [phoneValid, setPhoneValid] = useState(true);
 
-  // Função para lidar com a mudança nos inputs
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    let newValue = value;
-
-    // Verifica se o número de telefone tem menos de 11 dígitos ou não está no formato correto
-    if (name === 'phone' && (!/^\(\d{2}\) 9\d{4}-\d{4}$/.test(value) || value.length < 14)) {
-      setPhoneValid(false);
-    } else {
-      setPhoneValid(true);
-    }
-
-    // Formata automaticamente o número do telefone para o padrão brasileiro
-    if (name === 'phone' && value.length <= 15) {
-      newValue = value.replace(/\D/g, '') // Remove todos os caracteres não numéricos
-                     .replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) 9 $2-$3'); // Formata como (xx) 9 xxxx-xxxx
-    }
+    const newValue = name === 'phone' ? formatBrazilianPhone(value) : value;
 
     setContact({
       ...contact,
-      [name]: newValue
+      [name]: newValue,
     });
 
-    // Verifica a validade do email
     if (name === 'email') {
-      const isValid = /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b/.test(value);
-      setEmailValid(isValid);
+      setEmailValid(value.length === 0 || isValidContactEmail(value));
+    }
+
+    if (name === 'phone') {
+      setPhoneValid(newValue.length === 0 || isValidBrazilianCellphone(newValue));
     }
   };
 
-  // Função para lidar com o envio do formulário
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Aqui você pode enviar os dados do contato para onde precisar (API, banco de dados, etc.)
     console.log(contact);
-    // Limpar o formulário após o envio
     setContact({
       name: '',
       email: '',
-      phone: ''
+      phone: '',
     });
   };
 
@@ -80,18 +63,18 @@ const ContactForm = () => {
             placeholder="Email"
             required
           />
-          {!emailValid && <p className="error-message">Insira um e-mail válido</p>}
+          {!emailValid && <p className="error-message">Insira um e-mail valido</p>}
         </div>
         <div className="form-group">
           <input
-            type="tel" // Tipo de input para número de telefone
+            type="tel"
             name="phone"
             value={contact.phone}
             onChange={handleInputChange}
             placeholder="Telefone"
             required
           />
-          {!phoneValid && <p className="error-message">O número de telefone deve ter o formato (DDD) 9XXXX-XXXX</p>}
+          {!phoneValid && <p className="error-message">O numero de telefone deve ter o formato (DDD) 9XXXX-XXXX</p>}
         </div>
         <button type="submit">Cadastrar</button>
       </form>
