@@ -6,6 +6,7 @@ import { NumericFormat } from 'react-number-format';
 import React, { useEffect, useState } from 'react';
 import ImageUploading from 'react-images-uploading';
 import ReactLoading from 'react-loading';
+import { parseCurrencyValue } from '../../../utils/currency';
 
 export default function Cadastro() {
   const router = useRouter();
@@ -96,8 +97,8 @@ export default function Cadastro() {
     const formData = new FormData();
     formData.append('titulo', titulo);
     formData.append('autor', autor);
-    formData.append('preco_compra', parseFloat(precoCompra.replace('R$', '').replace(',', '.')));
-    formData.append('preco_estimado', parseFloat(precoVenda.replace('R$', '').replace(',', '.')));
+    formData.append('preco_compra', parseCurrencyValue(precoCompra));
+    formData.append('preco_estimado', parseCurrencyValue(precoVenda));
     formData.append('sinopse', sinopse);
     formData.append('conservacao', conservacao);
     formData.append('data_cadastro', new Date().toISOString().split('T')[0]);

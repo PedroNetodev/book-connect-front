@@ -6,6 +6,7 @@ import { NumericFormat } from 'react-number-format';
 import React, { useEffect, useState } from 'react';
 import ImageUploading from 'react-images-uploading';
 import ReactLoading from 'react-loading';
+import { parseCurrencyValue } from '../../../../utils/currency';
 
 export default function Troca() {
   const router = useRouter();
@@ -55,8 +56,8 @@ export default function Troca() {
 
     formData.append('novo_livro[titulo]', titulo);
     formData.append('novo_livro[autor]', autor);
-    formData.append('novo_livro[preco_compra]', parseFloat(precoCompra.replace('R$', '').replace(',', '.')));
-    formData.append('novo_livro[preco_estimado]', parseFloat(precoVenda.replace('R$', '').replace(',', '.')));
+    formData.append('novo_livro[preco_compra]', parseCurrencyValue(precoCompra));
+    formData.append('novo_livro[preco_estimado]', parseCurrencyValue(precoVenda));
     formData.append('novo_livro[sinopse]', sinopse);
     formData.append('novo_livro[conservacao]', conservacao);
     formData.append('novo_livro[data_cadastro]', new Date().toISOString().split('T')[0]);

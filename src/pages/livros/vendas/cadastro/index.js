@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
 import { NumericFormat } from 'react-number-format';
 import ReactLoading from 'react-loading';
+import { formatDateForMySQL } from '../../../../utils/date';
+import { parseCurrencyValue } from '../../../../utils/currency';
 
 export default function VendasCadastro() {
   const router = useRouter();
@@ -96,28 +98,17 @@ export default function VendasCadastro() {
     }
   };
 
-  const formatDateForMySQL = (date) => {
-    const d = new Date(date);
-    const year = d.getFullYear();
-    const month = (`0${d.getMonth() + 1}`).slice(-2);
-    const day = (`0${d.getDate()}`).slice(-2);
-    const hours = (`0${d.getHours()}`).slice(-2);
-    const minutes = (`0${d.getMinutes()}`).slice(-2);
-    const seconds = (`0${d.getSeconds()}`).slice(-2);
-    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
       const formData = {
-        valor: parseFloat(preco),
+        valor: parseCurrencyValue(preco),
         cliente_id: null, // Ou um valor válido se necessário
         data_venda: formatDateForMySQL(new Date()),
         delivery: vendaOnline,
-        valor_frete: vendaOnline ? valorFrete : 0.00, // Substitua pelo valor correto do frete
+        valor_frete: vendaOnline ? parseCurrencyValue(valorFrete) : 0.00, // Substitua pelo valor correto do frete
         endereco_id: vendaOnline ? enderecoId : null,
         livro_id: id_book // Inclua o livro_id
       };

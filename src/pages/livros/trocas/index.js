@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ReactLoading from 'react-loading';
+import { safeArray } from '../../../utils/book';
 
 export default function Trocas() {
     const [trocas, setTrocas] = useState([]);
@@ -61,7 +62,7 @@ export default function Trocas() {
                             </tr>
                         </thead>
                         <tbody>
-                            {Array.isArray(trocas) && trocas.map((troca) => (
+                            {safeArray(trocas).map((troca) => (
                                 <tr key={troca.id}>
                                     <td>{troca.livro_oferecido}</td>
                                     <td>{troca.livro_doado}</td>
