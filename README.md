@@ -53,7 +53,7 @@ docs/prints/selenium
 npm run prints:manual
 ```
 
-Os prints ficam em:
+Os prints estão em:
 
 ```text
 docs/prints/manuais
@@ -64,4 +64,3 @@ docs/prints/manuais
 - `docs/plano-de-testes-book-connect.md`
 - `docs/relatorio-defeitos-e-solucoes-book-connect.md`
 - `docs/refatoracoes.md`
-- `docs/roteiro-video.md`
