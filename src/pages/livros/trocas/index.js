@@ -61,7 +61,7 @@ export default function Trocas() {
                             </tr>
                         </thead>
                         <tbody>
-                            {trocas.map((troca) => (
+                            {Array.isArray(trocas) && trocas.map((troca) => (
                                 <tr key={troca.id}>
                                     <td>{troca.livro_oferecido}</td>
                                     <td>{troca.livro_doado}</td>

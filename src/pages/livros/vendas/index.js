@@ -72,7 +72,7 @@ export default function Vendas() {
                             </tr>
                         </thead>
                         <tbody>
-                            {vendas.map((venda) => (
+                            {Array.isArray(vendas) && vendas.map((venda) => (
                                 <tr key={venda.id}>
                                     <td>{venda.titulo}</td>
                                     <td>{new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(venda.valor)}</td>

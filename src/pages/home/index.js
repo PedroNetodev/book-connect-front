@@ -26,7 +26,6 @@ export default function Index() {
       const data = await response.json();
       console.log(data)
 
-      // Fetch images for each book
       const booksWithImages = await Promise.all(data.map(async (book) => {
         const imageResponse = await fetch(`https://book-connect-backend.vercel.app/api/livros/image/${book.id}`);
         console.log(imageResponse)
@@ -36,9 +35,10 @@ export default function Index() {
       }));
 
       setBooks(booksWithImages);
-      setLoading(false);
     } catch (error) {
       console.error('Error fetching books:', error);
+    } finally {
+      setLoading(false);
     }
   };
 
